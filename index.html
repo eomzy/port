@@ -1,0 +1,770 @@
+<title>Eom Eun Young — Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F7F6F3;
+  --surface: #FFFFFF;
+  --text: #1A1918;
+  --text-mid: #6B6560;
+  --accent: #2D5BE3;
+  --border: #E4E2DC;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 3rem;
+  background: rgba(247, 246, 243, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+nav.scrolled { border-bottom-color: var(--border); }
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 13.5vw, 15rem);
+  font-weight: normal;
+  font-style: italic;
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  text-wrap: balance;
+  margin-bottom: 3rem;
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.hero-tagline {
+  max-width: 420px;
+  font-size: 1.0625rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.9rem 2.25rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.hero-cta:hover { background: #1a45c8; transform: translateY(-2px); }
+.hero-cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.hero-scroll-indicator {
+  position: absolute;
+  right: 3rem;
+  bottom: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--border);
+}
+
+/* ── SHARED SECTION ── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── ABOUT ── */
+#about {
+  padding: 7rem 3rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 6rem;
+  align-items: start;
+  max-width: 1160px;
+}
+
+.about-visual {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+}
+.about-visual canvas { width: 100%; height: 100%; display: block; }
+
+.about-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.5vw, 2.625rem);
+  font-weight: normal;
+  line-height: 1.2;
+  margin-bottom: 1.75rem;
+  text-wrap: balance;
+}
+
+.about-content p {
+  color: var(--text-mid);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 46ch;
+  margin-bottom: 1.25rem;
+}
+
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+  margin-top: 0.5rem;
+  margin-bottom: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+}
+.avail-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #3aba7a;
+  flex-shrink: 0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.skill-item::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── PROJECTS ── */
+#projects { padding: 7rem 3rem; }
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3.5rem;
+}
+
+.projects-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.5vw, 2.625rem);
+  font-weight: normal;
+}
+
+.projects-count {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  padding-bottom: 0.25rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+}
+
+.project-card {
+  background: var(--bg);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.project-thumb {
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+}
+.project-thumb canvas {
+  width: 100%; height: 100%;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0, 0, 1);
+}
+.project-card:hover .project-thumb canvas { transform: scale(1.04); }
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 25, 24, 0.0);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  transition: background 0.35s;
+}
+.project-card:hover .project-overlay { background: rgba(26, 25, 24, 0.88); }
+
+.project-overlay-type {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s 0.05s, transform 0.3s 0.05s;
+  margin-bottom: 0.4rem;
+}
+.project-overlay-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: normal;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s 0.08s, transform 0.3s 0.08s;
+}
+.project-card:hover .project-overlay-type,
+.project-card:hover .project-overlay-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-meta {
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.project-meta-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.6rem;
+}
+.project-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  border: 1px solid var(--border);
+  padding: 0.2em 0.65em;
+  line-height: 1.6;
+}
+
+/* ── CONTACT ── */
+#contact {
+  padding: 7rem 3rem;
+  background: var(--text);
+}
+
+#contact .section-label {
+  color: rgba(255,255,255,0.28);
+}
+#contact .section-label::after { background: rgba(255,255,255,0.28); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 6rem;
+  align-items: start;
+  max-width: 1160px;
+}
+
+.contact-info h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  font-weight: normal;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.12;
+  margin-bottom: 1.75rem;
+  text-wrap: balance;
+}
+
+.contact-info p {
+  color: rgba(255,255,255,0.42);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  max-width: 36ch;
+  margin-bottom: 3rem;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+.contact-link:hover { color: #fff; }
+
+.contact-link-icon {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.35);
+  flex-shrink: 0;
+  transition: border-color 0.2s, color 0.2s;
+}
+.contact-link:hover .contact-link-icon {
+  border-color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.7);
+}
+
+form { display: flex; flex-direction: column; }
+
+.form-row { margin-bottom: 2.25rem; }
+
+.form-row label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 0.6rem;
+}
+
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.4rem 0 0.8rem;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+  -webkit-appearance: none;
+}
+.form-row input::placeholder,
+.form-row textarea::placeholder { color: rgba(255,255,255,0.18); }
+.form-row input:focus,
+.form-row textarea:focus { border-bottom-color: var(--accent); }
+
+.btn-submit {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2.25rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-submit:hover { background: #1a45c8; transform: translateY(-2px); }
+.btn-submit:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 3px; }
+.btn-submit:disabled { background: #1a6e3d; cursor: default; transform: none; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--text);
+  padding: 1.75rem 3rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.22);
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  #hero { padding: 0 1.5rem 4rem; }
+  .hero-scroll-indicator { display: none; }
+  #about, #projects, #contact { padding: 5rem 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-visual { aspect-ratio: 16/9; max-height: 300px; }
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+}
+@media (max-width: 580px) {
+  .nav-links { display: none; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+</style>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Eom Eun Young</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Product Designer &amp; Developer &mdash; Seoul / Remote</p>
+  <h1 class="hero-name">Eom<br>Eun Young</h1>
+  <div class="hero-bottom">
+    <p class="hero-tagline">I build thoughtful digital experiences — from interactive interfaces to scalable systems, always with clarity of purpose.</p>
+    <a href="#projects" class="hero-cta">View Selected Work &rarr;</a>
+  </div>
+  <div class="hero-scroll-indicator">Scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div class="about-visual">
+      <canvas id="about-canvas"></canvas>
+    </div>
+    <div class="about-content">
+      <h2>Designing where code meets craft</h2>
+      <p>I'm a product designer and front-end developer with 6 years of experience building products that people actually enjoy using. I work at the intersection of interface design, interaction, and engineering.</p>
+      <p>Previously at Studio North and Luma Creative. I care about systems thinking, typographic detail, and shipping work that holds up over time.</p>
+      <div class="availability-badge">
+        <span class="avail-dot"></span>
+        Available from Q3 2026
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">Product Design</div>
+        <div class="skill-item">React / Next.js</div>
+        <div class="skill-item">Design Systems</div>
+        <div class="skill-item">TypeScript</div>
+        <div class="skill-item">Figma &amp; Framer</div>
+        <div class="skill-item">Motion Design</div>
+        <div class="skill-item">Brand Identity</div>
+        <div class="skill-item">Node.js / APIs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Selected Work</div>
+  <div class="projects-header">
+    <h2>Recent Projects</h2>
+    <span class="projects-count">06 Projects</span>
+  </div>
+  <div class="projects-grid" id="projects-grid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>Let's make something worth making.</h2>
+      <p>Whether it's a product launch, a brand refresh, or a long-term collaboration — I'd love to hear what you're building.</p>
+      <div class="contact-links">
+        <a href="mailto:alex@example.com" class="contact-link">
+          <span class="contact-link-icon">@</span>
+          alex@example.com
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">in</span>
+          linkedin.com/in/alexkim
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">gh</span>
+          github.com/alexkim
+        </a>
+      </div>
+    </div>
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <label for="fname">Your Name</label>
+        <input type="text" id="fname" name="name" placeholder="Jane Doe" required>
+      </div>
+      <div class="form-row">
+        <label for="femail">Email Address</label>
+        <input type="email" id="femail" name="email" placeholder="jane@example.com" required>
+      </div>
+      <div class="form-row">
+        <label for="fmessage">Message</label>
+        <textarea id="fmessage" name="message" rows="4" placeholder="Tell me about your project…" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Eom Eun Young</p>
+  <p>Designed &amp; built with intention</p>
+</footer>
+
+<script>
+// Nav scroll border
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// About canvas — abstract geometric fill
+(function() {
+  const canvas = document.getElementById('about-canvas');
+  const ctx = canvas.getContext('2d');
+  function draw() {
+    const parent = canvas.parentElement;
+    const w = canvas.width = parent.offsetWidth;
+    const h = canvas.height = parent.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+    // Base
+    ctx.fillStyle = '#E4E2DC';
+    ctx.fillRect(0, 0, w, h);
+    // Large circle (head shape)
+    ctx.beginPath();
+    ctx.arc(w * 0.5, h * 0.35, h * 0.22, 0, Math.PI * 2);
+    ctx.fillStyle = '#CAC8C0';
+    ctx.fill();
+    // Shoulder block
+    ctx.beginPath();
+    ctx.rect(w * 0.08, h * 0.55, w * 0.84, h * 0.5);
+    ctx.fillStyle = '#D2D0C8';
+    ctx.fill();
+    // Subtle shadow under chin
+    const grad = ctx.createLinearGradient(0, h * 0.56, 0, h * 0.68);
+    grad.addColorStop(0, 'rgba(26,25,24,0.06)');
+    grad.addColorStop(1, 'rgba(26,25,24,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(w * 0.08, h * 0.55, w * 0.84, h * 0.18);
+    // Horizontal texture lines
+    ctx.strokeStyle = 'rgba(0,0,0,0.035)';
+    ctx.lineWidth = 1;
+    for (let y = 0; y < h; y += 5) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+    }
+  }
+  draw();
+  window.addEventListener('resize', draw, { passive: true });
+})();
+
+// Project data
+const projects = [
+  { title: 'Flux Dashboard', type: 'Product Design', tags: ['SaaS', 'Data Vis', 'React'], c1: '#1C2340', c2: '#0E1528' },
+  { title: 'Meridian Identity', type: 'Brand Design', tags: ['Logo', 'Typography', 'Print'], c1: '#2D3E2A', c2: '#1A2518' },
+  { title: 'Wavelength App', type: 'Mobile Design', tags: ['iOS', 'Motion', 'Audio'], c1: '#3A2830', c2: '#24181E' },
+  { title: 'Nocturne Editorial', type: 'Web Design', tags: ['Editorial', 'CSS', 'Animation'], c1: '#1E2E3A', c2: '#111C24' },
+  { title: 'Kairo Commerce', type: 'E-commerce', tags: ['Shopify', 'UX', 'Performance'], c1: '#3A3020', c2: '#241E12' },
+  { title: 'Sable Design System', type: 'Systems Design', tags: ['Tokens', 'Figma', 'Docs'], c1: '#1A1A1A', c2: '#0E0E0E' },
+];
+
+function drawThumb(canvas, c1, c2, index) {
+  const ctx = canvas.getContext('2d');
+  const parent = canvas.parentElement;
+  const w = canvas.width = parent.offsetWidth || 400;
+  const h = canvas.height = parent.offsetHeight || 300;
+  // Gradient bg
+  const grad = ctx.createLinearGradient(0, 0, w, h);
+  grad.addColorStop(0, c1);
+  grad.addColorStop(1, c2);
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+  // Abstract shape pattern unique per card
+  ctx.globalAlpha = 0.12;
+  ctx.fillStyle = '#ffffff';
+  const shapes = [
+    [0.65, 0.28, 0.32], [0.18, 0.65, 0.22], [0.48, 0.75, 0.18],
+    [0.72, 0.18, 0.28], [0.3, 0.3, 0.25], [0.55, 0.5, 0.2]
+  ];
+  const [sx, sy, sr] = shapes[index % shapes.length];
+  ctx.beginPath(); ctx.arc(w * sx, h * sy, h * sr, 0, Math.PI * 2); ctx.fill();
+  ctx.globalAlpha = 0.06;
+  ctx.beginPath(); ctx.rect(w * 0.05, h * 0.6, w * 0.5, h * 0.5); ctx.fill();
+  ctx.globalAlpha = 0.07;
+  ctx.beginPath(); ctx.arc(w * 0.15, h * 0.15, h * 0.14, 0, Math.PI * 2); ctx.fill();
+  ctx.globalAlpha = 1;
+}
+
+const grid = document.getElementById('projects-grid');
+projects.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'project-card';
+  card.innerHTML = `
+    <div class="project-thumb">
+      <canvas></canvas>
+      <div class="project-overlay">
+        <p class="project-overlay-type">${p.type}</p>
+        <p class="project-overlay-title">${p.title}</p>
+      </div>
+    </div>
+    <div class="project-meta">
+      <div class="project-meta-title">${p.title}</div>
+      <div class="project-meta-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+  `;
+  grid.appendChild(card);
+  const c = card.querySelector('canvas');
+  requestAnimationFrame(() => drawThumb(c, p.c1, p.c2, i));
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+['.about-grid', '.projects-grid', '.contact-grid'].forEach(sel => {
+  const el = document.querySelector(sel);
+  if (!el) return;
+  el.style.cssText = 'opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease';
+  observer.observe(el);
+});
+
+document.querySelectorAll('.project-card').forEach((card, i) => {
+  card.style.cssText = `opacity:0;transform:translateY(16px);transition:opacity 0.5s ${i * 0.07}s ease,transform 0.5s ${i * 0.07}s ease`;
+  observer.observe(card);
+});
+
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-submit');
+  btn.textContent = 'Message Sent';
+  btn.disabled = true;
+}
+</script>
